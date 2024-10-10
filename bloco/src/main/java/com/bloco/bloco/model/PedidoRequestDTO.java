@@ -1,6 +1,6 @@
 package com.bloco.bloco.model;
 
-public record PedidoRequesDTO (
+public record PedidoRequestDTO(
         int andares,
         String cor1,
         String cor2,
