@@ -4,30 +4,20 @@ import com.bloco.bloco.Service.PedidoService;
 import com.bloco.bloco.model.Pedido;
 import com.bloco.bloco.model.PedidoRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 @RestController
-@RequestMapping("/api/pedido")
+@RequestMapping("/pedido")
 public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @PostMapping(consumes = "multipart/form-data")
-    public ResponseEntity<Pedido> create(
-            //mapeamento dos campos
-            @RequestParam("andares") int andares,
-            @RequestParam("cor1")String cor1,
-            @RequestParam("cor2")String cor2,
-            @RequestParam("cor3")String cor3,
-            @RequestParam("desenho1")String desenho1,
-            @RequestParam("desenho2")String desenho2,
-            @RequestParam("desenho3")String desenho3
-    ) {
-
-        PedidoRequestDTO pedidoRequestDTO = new PedidoRequestDTO(andares,cor1,cor2,cor3,desenho1,desenho2,desenho3);
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<Pedido> create(@RequestBody PedidoRequestDTO pedidoRequestDTO) {
         Pedido newPedido = this.pedidoService.createPedido(pedidoRequestDTO);
         return ResponseEntity.ok(newPedido);
     }
